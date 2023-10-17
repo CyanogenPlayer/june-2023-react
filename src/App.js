@@ -1,4 +1,5 @@
 import React from 'react';
+
 import PeopleComponent from "./components/PeopleComponent/PeopleComponent";
 import {simpsons} from "./data/Simpsons";
 import {characters} from "./data/RickAndMorty";

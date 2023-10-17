@@ -1,0 +1,8 @@
+.PeopleComponent {
+    margin: 10px 0;
+    background: #95b5e8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
