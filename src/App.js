@@ -1,10 +1,11 @@
 import React from 'react';
-import PostsContainer from "./components/PostContainer/PostsContainer";
+
+import CarsContainer from "./components/CarsContainer/CarsContainer";
 
 const App = () => {
     return (
         <div>
-            <PostsContainer/>
+            <CarsContainer/>
         </div>
     );
 };
