@@ -5,7 +5,7 @@ import {carService} from "../../services/carService";
 import {joiResolver} from "@hookform/resolvers/joi";
 import {carValidator} from "../../validators/carValidator";
 
-const CarForm = ({setTrigger, carForUpdate}) => {
+const CarForm = ({setTrigger, carForUpdate, setCarForUpdate}) => {
     const {register, reset, handleSubmit, formState: {isValid, errors}, setValue} = useForm({
         mode: 'all',
         resolver: joiResolver(carValidator)
@@ -20,7 +20,13 @@ const CarForm = ({setTrigger, carForUpdate}) => {
     }, [carForUpdate]);
 
     const save = async (car) => {
-        await carService.create(car);
+        if (!carForUpdate) {
+            await carService.create(car);
+        }
+        else {
+            await carService.updateById(carForUpdate.id, car);
+            setCarForUpdate(null);
+        }
         setTrigger(prev => !prev);
         reset();
     }
