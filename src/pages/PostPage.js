@@ -1,16 +1,16 @@
 import React from 'react';
 import {useLocation} from "react-router-dom";
 
-import Posts from "../components/PostsContainer/Posts";
+import Post from "../components/PostContainer/Post";
 
-const PostsPage = () => {
+const PostPage = () => {
     const {state} = useLocation();
 
     return (
         <div>
-            <Posts userId={state}/>
+            <Post id={state}/>
         </div>
     );
 };
 
-export default PostsPage;
+export default PostPage;
