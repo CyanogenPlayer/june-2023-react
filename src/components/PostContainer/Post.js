@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+
 import {postService} from "../../services/postService";
 
 const Post = ({id}) => {
