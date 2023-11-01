@@ -1,15 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
+import {useLoaderData} from "react-router-dom";
 
-import {userService} from "../../services/userService";
-import user from "./User";
 import User from "./User";
 
 const Users = () => {
-    const [users, setUsers] = useState([]);
-
-    useEffect(() => {
-        userService.getAll().then(({data}) => setUsers(data))
-    }, []);
+    const {data: users} = useLoaderData();
     
     return (
         <div>
