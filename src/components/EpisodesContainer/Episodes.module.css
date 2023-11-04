@@ -1,0 +1,9 @@
+.Episodes {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.buttonsBlock{
+    display: flex;
+    justify-content: space-around;
+}

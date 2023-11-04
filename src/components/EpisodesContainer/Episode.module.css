@@ -1,0 +1,4 @@
+.Episode {
+    border: 1px solid darkcyan;
+    width: calc(20% - 2px);
+}
