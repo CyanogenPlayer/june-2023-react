@@ -1,30 +1,30 @@
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {useSearchParams} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
 
-import {episodeService} from "../../services";
 import {Episode} from "./Episode";
 import css from './Episodes.module.css'
+import {episodeActions} from "../../redux";
 
 const Episodes = () => {
-    const [episodes, setEpisodes] = useState([]);
-    const [prevNext, setPrevNext] = useState({prev: null, next: null});
+    const {episodes, prev, next} = useSelector(state => state.episodes);
+    const dispatch = useDispatch();
     const [query, setQuery] = useSearchParams({page: '1'});
 
-    useEffect(() => {
-        episodeService.getAll(query.get('page')).then(({data: {info, results}}) => {
-            setEpisodes(results)
-            setPrevNext({prev: info.prev, next: info.next})
-        })
-    }, [query.get('page')]);
+    const page = query.get('page');
 
-    const prev = () => {
+    useEffect(() => {
+        dispatch(episodeActions.getAll({page}))
+    }, [page, dispatch]);
+
+    const prevButtonClick = () => {
         setQuery(prev => {
             prev.set('page', `${+prev.get('page') - 1}`);
             return prev
         })
     }
 
-    const next = () => {
+    const nextButtonClick = () => {
         setQuery(prev => {
             prev.set('page', `${+prev.get('page') + 1}`);
             return prev;
@@ -37,8 +37,8 @@ const Episodes = () => {
                 {episodes.map(episode => <Episode key={episode.id} episode={episode}/>)}
             </div>
             <div className={css.buttonsBlock}>
-                <button onClick={prev} disabled={!prevNext.prev}>prev</button>
-                <button onClick={next} disabled={!prevNext.next}>next</button>
+                <button onClick={prevButtonClick} disabled={!prev}>prev</button>
+                <button onClick={nextButtonClick} disabled={!next}>next</button>
             </div>
         </div>
     );
